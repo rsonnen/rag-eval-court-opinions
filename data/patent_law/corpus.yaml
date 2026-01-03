@@ -1,0 +1,46 @@
+name: "Patent Law Court Opinions"
+
+corpus_context: >
+  150 patent law court opinions from CourtListener (Free Law Project), dated
+  May-December 2025. Includes Federal Circuit (45 opinions), Delaware district
+  courts, Court of Federal Claims, Texas courts, and various regional circuits.
+  Full opinions with holdings, legal reasoning, claim construction analyses,
+  and obviousness determinations. Document sizes range from ~100KB to several MB.
+
+scenarios:
+  graduate_exam:
+    name: "Graduate Patent Law Final"
+    description: >
+      You are creating questions for a final exam in a graduate-level patent
+      law course. Students have read these opinions as required reading.
+      Questions should test whether they understood the court's legal reasoning,
+      can identify the controlling legal standards applied (claim construction,
+      obviousness, infringement analysis), and understand how the specific facts
+      determined the outcome. Avoid simple name/date recall.
+
+  paralegal_research:
+    name: "Paralegal Research Skills"
+    description: >
+      You are creating questions to evaluate a paralegal's legal research
+      abilities. Questions should test whether they can accurately locate
+      specific holdings, identify procedural posture, extract key facts
+      (parties, claims at issue, damages amounts), and find relevant precedent
+      cited by the court. Focus on precision and completeness of retrieval.
+
+  undergrad_ip_survey:
+    name: "Undergraduate IP Survey"
+    description: >
+      You are creating questions for an introductory intellectual property
+      course. Students have limited legal background. Questions should focus
+      on basic patent concepts illustrated by the case - what was the dispute,
+      who won, and why in plain terms. Avoid technical claim construction
+      details or nuanced doctrinal analysis.
+
+  rag_eval:
+    name: "RAG System Evaluation"
+    description: >
+      You are creating questions to evaluate whether a retrieval system actually
+      retrieved and read this document versus hallucinating. Questions must have
+      specific, verifiable answers requiring the actual document - particular
+      quotes, specific factual details, exact holdings. Include details that
+      would be impossible to guess without reading the opinion.

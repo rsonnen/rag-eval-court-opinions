@@ -1,0 +1,49 @@
+name: "Environmental Law Court Opinions"
+
+corpus_context: >
+  150 court opinions from federal and state courts involving environmental law,
+  dated September-December 2025. Sourced from CourtListener using search query
+  "Clean Water Act" OR "Clean Air Act" OR "EPA". Heavy representation from
+  D.C. District Court (50 cases) and federal circuit courts. Cases include
+  EPA regulatory challenges, Fish & Wildlife enforcement, Interior Department
+  land management disputes, NEPA/environmental impact cases, and citizen suits
+  under environmental statutes.
+
+scenarios:
+  graduate_exam:
+    name: "Graduate Environmental Law Final"
+    description: >
+      You are creating questions for a final exam in a graduate-level
+      environmental law course. Students have read these opinions as required
+      reading. Questions should test whether they understood the court's
+      application of environmental statutes (Clean Water Act, Clean Air Act,
+      NEPA), administrative law principles in EPA challenges, and the interplay
+      between federal agencies and regulated parties. Focus on legal reasoning
+      and statutory interpretation, not case names or dates.
+
+  regulatory_practice:
+    name: "Environmental Regulatory Practice"
+    description: >
+      You are creating questions to evaluate an attorney's understanding of
+      environmental regulatory practice. Questions should test ability to
+      identify applicable standards of review for agency actions, understand
+      procedural requirements for environmental challenges, and recognize
+      key holdings affecting compliance obligations. Focus on practical
+      application of legal standards.
+
+  policy_analysis:
+    name: "Environmental Policy Analysis"
+    description: >
+      You are creating questions for a policy course examining environmental
+      law through a policy lens. Questions should focus on how courts balance
+      environmental protection against economic interests, interpret agency
+      discretion, and apply procedural requirements. Avoid deep doctrinal
+      analysis; focus on policy implications of holdings.
+
+  rag_eval:
+    name: "RAG System Evaluation"
+    description: >
+      You are creating questions to evaluate whether a retrieval system actually
+      read this document. Questions must have specific, verifiable answers -
+      particular holdings, specific statutory sections cited, exact procedural
+      postures. Include details impossible to guess without the document.

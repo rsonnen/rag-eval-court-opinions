@@ -1,0 +1,49 @@
+name: "Immigration Court Opinions"
+
+corpus_context: >
+  150 court opinions involving immigration law, sourced from CourtListener
+  using search query "asylum" OR "deportation" OR "immigration". Dated
+  December 2025. Includes federal circuit courts (1st, 5th, 7th, 9th),
+  district courts, and state appellate courts. Cases focus on civil
+  immigration enforcement: warrantless arrest authority under 8 USC 1357,
+  consent decree enforcement against ICE/DHS, mandatory detention under
+  8 USC 1225-1226, and INA statutory interpretation. Mix of class actions,
+  habeas challenges, and policy litigation.
+
+scenarios:
+  graduate_exam:
+    name: "Graduate Immigration Law Final"
+    description: >
+      You are creating questions for a final exam in a graduate-level
+      immigration law course. Questions should test understanding of INA
+      provisions, enforcement authority limits, detention standards, and
+      judicial review of immigration decisions. Focus on statutory
+      interpretation and how courts balance enforcement discretion against
+      individual rights. Avoid simple procedural recall.
+
+  enforcement_practice:
+    name: "Immigration Enforcement Practice"
+    description: >
+      You are creating questions to evaluate an attorney's understanding
+      of immigration enforcement litigation. Questions should test ability
+      to identify applicable statutory authority, recognize procedural
+      requirements for detention and removal, and understand limits on
+      class-wide relief under 8 USC 1252(f)(1). Focus on practical
+      application of enforcement standards.
+
+  civil_rights:
+    name: "Immigration Civil Rights"
+    description: >
+      You are creating questions for a civil rights course examining
+      immigration enforcement. Questions should focus on constitutional
+      limits on enforcement, consent decree mechanisms, and how courts
+      supervise government compliance with settlement agreements. Test
+      understanding of remedial frameworks in immigration litigation.
+
+  rag_eval:
+    name: "RAG System Evaluation"
+    description: >
+      You are creating questions to test whether a retrieval system actually
+      read this document. Questions must have specific, verifiable answers -
+      particular statutory sections cited, specific holdings on enforcement
+      authority, exact procedural rulings. Include details impossible to guess.

@@ -1,0 +1,47 @@
+name: "Antitrust Court Opinions"
+
+corpus_context: >
+  150 court opinions involving antitrust and competition law, sourced from
+  CourtListener using search query "Sherman Act" OR "antitrust" OR "monopoly".
+  Dated December 2025. Includes D.C. Circuit and multiple federal circuit
+  courts, Court of Federal Claims, and state appellate courts. Cases cover
+  monopoly practices, supply chain liability, corporate antitrust enforcement,
+  and market competition disputes. Mix of Sherman Act claims, merger challenges,
+  and competitive injury cases.
+
+scenarios:
+  graduate_exam:
+    name: "Graduate Antitrust Law Final"
+    description: >
+      You are creating questions for a final exam in a graduate-level antitrust
+      law course. Questions should test understanding of Sherman Act analysis,
+      market definition, monopoly power assessments, and anticompetitive conduct
+      standards. Focus on how courts apply rule of reason vs. per se analysis,
+      evaluate market power, and assess competitive harm. Avoid simple case
+      name recall.
+
+  merger_review:
+    name: "Merger Review Practice"
+    description: >
+      You are creating questions to evaluate an attorney's understanding of
+      merger review and competitive analysis. Questions should test ability
+      to identify relevant markets, assess concentration effects, and recognize
+      efficiency defenses. Focus on practical application of antitrust standards
+      to business combinations.
+
+  economic_analysis:
+    name: "Antitrust Economic Analysis"
+    description: >
+      You are creating questions for an economics course examining antitrust
+      through an economic lens. Questions should focus on market definition
+      methodology, competitive effects analysis, and economic reasoning in
+      court decisions. Test understanding of how courts evaluate market power
+      and consumer harm.
+
+  rag_eval:
+    name: "RAG System Evaluation"
+    description: >
+      You are creating questions to test whether a retrieval system actually
+      read this document. Questions must have specific, verifiable answers -
+      particular market definitions used, specific legal standards applied,
+      exact holdings on liability. Include details impossible to guess.

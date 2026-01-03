@@ -1,0 +1,17 @@
+# Downloaded opinions (PDFs)
+data/*/opinions/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+scripts/.venv/
+
+# uv lock (user regenerates)
+uv.lock
+
+# IDE/OS
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,47 @@
+name: "First Amendment Court Opinions"
+
+corpus_context: >
+  150 court opinions involving First Amendment issues, sourced from CourtListener
+  using search query "First Amendment" "free speech". Dated August 2023 - August
+  2025. Heavy representation from federal appellate courts. Cases focus on
+  commercial/regulatory speech contexts: compelled speech claims, government
+  conditions on benefits, pharmaceutical pricing regulations, and disclosure
+  requirements. Mix of traditional free speech cases with regulatory and
+  administrative law intersections.
+
+scenarios:
+  graduate_exam:
+    name: "Graduate Constitutional Law Final"
+    description: >
+      You are creating questions for a final exam in a graduate-level
+      constitutional law course focusing on First Amendment jurisprudence.
+      Questions should test understanding of speech doctrine categories
+      (commercial speech, compelled speech, government speech), applicable
+      levels of scrutiny, and how courts balance free speech interests
+      against regulatory objectives. Focus on doctrinal reasoning.
+
+  practitioner_eval:
+    name: "First Amendment Litigation Practice"
+    description: >
+      You are creating questions to evaluate an attorney's readiness for
+      First Amendment litigation. Questions should test ability to identify
+      which First Amendment doctrine applies, what level of scrutiny governs,
+      and what factual showings are required. Focus on practical application
+      of constitutional standards to real disputes.
+
+  undergrad_survey:
+    name: "Undergraduate Constitutional Rights"
+    description: >
+      You are creating questions for an undergraduate course on constitutional
+      rights. Students have general but not expert knowledge. Questions should
+      focus on core First Amendment principles illustrated by the case - who
+      claimed their speech was restricted, what the government argued, and
+      how the court resolved it. Avoid deep doctrinal complexity.
+
+  rag_eval:
+    name: "RAG System Evaluation"
+    description: >
+      You are creating questions to test whether a retrieval system actually
+      read this document. Questions must have specific, verifiable answers -
+      particular constitutional tests applied, specific holdings, exact
+      procedural outcomes. Include details impossible to guess without reading.
