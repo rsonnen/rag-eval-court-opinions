@@ -1,73 +1,51 @@
 # rag-eval-court-opinions
 
-Evaluation corpus of court opinions from CourtListener for testing RAG (Retrieval-Augmented Generation) systems.
+Evaluation corpus of court opinions from CourtListener for testing RAG systems.
 
 ## What This Is
 
 This repository contains **evaluation data for RAG systems**:
 
-- **corpus.yaml** - Evaluation configuration defining domain context and testing scenarios
-- **Generated questions** - Validated Q/A pairs for evaluation (where available)
+- **corpus.yaml** - Evaluation scenarios (in each corpus directory)
 - **metadata.json** - Opinion inventory with CourtListener IDs
-- **Download script** - Fetches PDFs from CourtListener storage
+- **Generated questions** - Validated Q/A pairs (where available)
 
-The actual PDF opinions are not included - they are public domain works hosted by CourtListener.
+The actual PDF opinions are not included. Use `download_opinions.py` to fetch them from CourtListener.
 
 ## Quick Start
-
-Download opinions from a pre-curated corpus:
 
 ```bash
 cd scripts
 uv sync
-uv run python download_opinions.py --corpus patent_law --data-dir ../data
+uv run python download_opinions.py patent_law --max-docs 5
 ```
 
-## Purpose
+## Available Corpora
 
-Court opinions are a realistic use case for legal research assistants. This corpus tests:
+| Corpus | Opinions | Description |
+|--------|----------|-------------|
+| `patent_law` | 150 | Patent infringement and IP cases |
+| `environmental` | 150 | Clean Water Act, Clean Air Act, EPA cases |
+| `first_amendment` | 150 | First Amendment free speech cases |
+| `antitrust` | 150 | Sherman Act and competition law |
+| `immigration` | 150 | Asylum and deportation proceedings |
 
-- **Retrieval**: Precise clause lookup, citation navigation, legal reasoning chains
-- **Document processing**: Long-form structured text with footnotes, citations, complex formatting
-- **Query types**: "What precedent applies to X?", "How did the court reason about Y?", cross-case synthesis
+All corpora were built December 2025 from CourtListener's public archive.
 
-## Usage
-
-```bash
-# Install dependencies
-uv sync
-
-# Download a corpus
-uv run python download_opinions.py "patent infringement" --corpus patent_law --max-docs 150
-uv run python download_opinions.py "Clean Water Act" --corpus environmental --max-docs 200
-uv run python download_opinions.py "asylum deportation" --corpus immigration --max-docs 150
-
-# Specify output directory
-uv run python download_opinions.py "antitrust" --corpus antitrust --max-docs 100 --data-dir /path/to/data
-
-# Filter by court
-uv run python download_opinions.py "patent" --corpus patent_cafc --court cafc --max-docs 100
-
-# Filter by date
-uv run python download_opinions.py "First Amendment" --corpus first_amendment_recent --filed-after 2020-01-01
-```
-
-## Output Structure
+## Directory Structure
 
 ```
 data/<corpus>/
     corpus.yaml         # Evaluation configuration
-    opinions/           # PDF files named by opinion ID (gitignored)
-        12345.pdf
-        12346.pdf
-        ...
-    metadata.json       # Opinion metadata for all downloaded documents
+    metadata.json       # Opinion inventory
+    opinions/           # Downloaded PDFs (gitignored)
 
 scripts/
-    download_opinions.py  # Fetch opinions and build corpora
+    download_opinions.py  # Fetch opinions from existing metadata
+    build_corpus.py       # Build new corpora via CourtListener search
 ```
 
-### Metadata Format
+## Metadata Format
 
 ```json
 {
@@ -93,44 +71,80 @@ scripts/
 }
 ```
 
-## Suggested Corpora
+## Downloading Opinions
 
-Based on the RAGAS evaluation TODO, create these topic corpora (100-500 docs each):
+The download script fetches PDFs from CourtListener storage based on existing metadata:
 
-| Corpus | Search Query | Notes |
-|--------|--------------|-------|
-| patent_law | `"patent infringement"` | Consider `--court cafc` for Federal Circuit |
-| environmental | `"Clean Water Act" OR "Clean Air Act" OR "EPA"` | EPA regulatory cases |
-| first_amendment | `"First Amendment" "free speech"` | Constitutional law |
-| contract_disputes | `"breach of contract"` | Commercial litigation |
-| employment_discrimination | `"Title VII" "employment discrimination"` | Civil rights |
-| antitrust | `"Sherman Act" OR "antitrust"` | Competition law |
-| immigration | `"asylum" OR "deportation"` | Immigration proceedings |
-| criminal_sentencing | `"sentencing guidelines"` | Criminal appeals |
+```bash
+cd scripts
+uv run python download_opinions.py patent_law --max-docs 5
+uv run python download_opinions.py environmental
+```
 
-## Features
+| Option | Description |
+|--------|-------------|
+| `corpus` | Corpus name (e.g., patent_law) |
+| `--max-docs` | Maximum documents to download (default: all) |
+| `--delay` | Delay between requests in seconds (default: 1.0) |
 
-- **Resumable downloads**: Re-run the same command to continue interrupted downloads
-- **Rate limiting**: Conservative 3-second delays with exponential backoff on 429s
-- **Metadata tracking**: All opinion metadata saved for downstream processing
+## Building New Corpora
 
-## API Details
+The build script searches CourtListener and creates new corpora:
 
-- **Search**: `GET https://www.courtlistener.com/api/rest/v4/search/?q=<query>&type=o`
-- **PDFs**: `https://storage.courtlistener.com/<local_path>` (public, no auth)
-- **Pagination**: Cursor-based via `next` URL in response
+```bash
+cd scripts
+uv run python build_corpus.py "patent infringement" --corpus patent_law --max-docs 150
+uv run python build_corpus.py "Clean Water Act" --corpus environmental --max-docs 200
+```
 
-CourtListener is a nonprofit project of [Free Law Project](https://free.law/). Be respectful with rate limits.
+| Option | Description |
+|--------|-------------|
+| `query` | Search query for CourtListener (required) |
+| `--corpus` | Corpus directory name (required) |
+| `--max-docs` | Maximum documents to download (default: 150) |
+| `--court` | Filter by court ID (e.g., 'cafc' for Federal Circuit) |
+| `--filed-after` | Only download opinions filed after date (YYYY-MM-DD) |
+| `--data-dir` | Output directory (default: ../data/) |
+
+### Rate Limiting
+
+Both scripts respect CourtListener (a small nonprofit) with delays between requests.
+
+### Evaluation Configuration
+
+Each corpus contains a `corpus.yaml` with evaluation scenarios:
+
+```yaml
+# data/patent_law/corpus.yaml
+name: "Patent Law Court Opinions"
+
+corpus_context: >
+  150 patent law court opinions from CourtListener, dated May-December 2025...
+
+scenarios:
+  graduate_exam:
+    name: "Graduate Patent Law Final"
+    description: >
+      Questions testing understanding of court's legal reasoning,
+      controlling legal standards, and how facts determined outcomes...
+
+  paralegal_research:
+    name: "Paralegal Research Skills"
+    description: >
+      Questions testing ability to locate specific holdings,
+      identify procedural posture, extract key facts...
+
+  rag_eval:
+    name: "RAG System Evaluation"
+    description: >
+      Questions with specific, verifiable answers requiring the
+      actual document - particular quotes, specific factual details...
+```
 
 ## Licensing
 
-**This repository** (scripts, configurations): MIT License
+**This repository**: MIT License
 
 **Court opinions**: Public domain (government works not subject to copyright)
 
 **CourtListener data**: [CC BY-NC](https://creativecommons.org/licenses/by-nc/4.0/) for non-commercial use. See [CourtListener Terms](https://www.courtlistener.com/terms/).
-
-## Requirements
-
-- Python 3.11+
-- Dependencies: `httpx`, `tqdm` (see pyproject.toml)

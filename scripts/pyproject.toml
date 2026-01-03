@@ -9,4 +9,22 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = []
+dev = [
+    "mypy>=1.11.0",
+    "ruff>=0.6.0",
+    "bandit>=1.7.0",
+    "types-tqdm>=4.66.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
